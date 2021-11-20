@@ -58,6 +58,8 @@ The configuration of the KF has to be specified as a dict `model_args` containin
 See an example [here](https://github.com/ido90/Optimized-Kalman-Filter/blob/master/okf/example/simple_lidar_model.py).
 
 #### Train and test
+`import okf`
+
 `model = okf.OKF(**model_args)  # set optimize=False for the standard KF baseline`
 
 `okf.train(model, Ztrain, Xtrain)`
