@@ -33,4 +33,36 @@ Tuning the KF parameters through noise estimation (as explained above) yields op
 
 ## How to use
 
-TODO
+Installation: `TODO`
+
+Usage example: see [`example.ipynb`](https://github.com/ido90/Optimized-Kalman-Filter/blob/master/example.ipynb).
+
+#### Data
+The data consists of 2 lists of length n, where n is the number of trajectories in the data:
+1. X[i] = a numpy array of type double and shape (n_time_steps(trajectory i), state_dimension).
+2. Z[i] = a numpy array of type double and shape (n_time_steps(trajectory i), observation_dimension).
+
+For example, if a state is 4-dimensional (e.g. (x,y,vx,vy)) and an observation is 2-dimensional (e.g. (x,y)), and the i'th trajectory has 30 time-steps, then `X[i].shape` is (30,4) and `Z[i].shape` is (30,2).
+
+Below we assume that `Xtrain, Ztrain, Xtest, Ztest` correspond to train and test datasets of the format specified above.
+
+#### Configuration
+The configuration of the KF has to be specified as a dict `model_args` containing the following entries:
+- `dim_x`: the number of entries in a state
+- `dim_z`: the number of entries in an observation
+- `init_z2x`: a function that receives the first observation and returns the first state-estimate
+- `F`: the dynamics model: a pytorch tensor of type double and shape (dim_x, dim_x)
+- `H`: the observation model: a pytorch tensor of type double and shape (dim_z, dim_x); or a function that returns such a tensor given the estimated state and the current observation
+- `loss_fun`: function(predicted_x, true_x) used as loss for training and evaluation
+
+See an example [here](https://github.com/ido90/Optimized-Kalman-Filter/blob/master/okf/example/simple_lidar_model.py).
+
+#### Train and test
+`model = okf.OKF(**model_args)  # set optimize=False for the standard KF baseline`
+
+`okf.train(model, Ztrain, Xtrain)`
+  
+`loss = okf.test_model(model, Ztest, Xtest, loss_fun=model_args['loss_fun'])`
+
+#### Analysis
+See [`example.ipynb`](https://github.com/ido90/Optimized-Kalman-Filter/blob/master/example.ipynb).
