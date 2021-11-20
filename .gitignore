@@ -1,0 +1,8 @@
+.ipynb_checkpoints/
+
+data/
+models/
+
+okf/__pycache__/
+okf/example/__pycache__/
+okf/example/.ipynb_checkpoints/
