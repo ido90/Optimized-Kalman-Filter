@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: Optimized-Kalman-Filter
-Version: 0.0.1
+Version: 0.0.2
 Summary: Optimization of a Kalman Filter from data of states and their observations.
 Home-page: https://github.com/ido90/Optimized-Kalman-Filter
 Author: Ido Greenberg
@@ -15,14 +15,22 @@ License-File: LICENSE.txt
 
 # Optimized Kalman Filter
 
-Get an optimized Kalman Filter from data of system-states and observations.
+**Get an optimized Kalman Filter from data of system-states and observations.**
 
-This package implements the algorithm introduced in the paper [Kalman Filter Is All You Need: Optimization Works When Noise Estimation Fails](https://arxiv.org/abs/2104.02372), by Greenberg, Mannor and Yannay.
+This package implements the paper [**Kalman Filter Is All You Need: Optimization Works When Noise Estimation Fails**](https://arxiv.org/abs/2104.02372), by Greenberg, Mannor and Yannay.
+
+**Installation**: `pip install Optimized-Kalman-Filter`
+
+**Usage example**: [`example.ipynb`](https://github.com/ido90/Optimized-Kalman-Filter/blob/master/example.ipynb).
 
 - [Background](#background-the-kalman-filter)
 - [When to use](#when-to-use-this-package)
 - [Why to use](#why-to-use)
 - [How to use](#how-to-use)
+
+| <img src="https://idogreenberg.neocities.org/linked_images/okf_errors.png" width="280"> <img src="https://idogreenberg.neocities.org/linked_images/okf_sample.png" width="270"> |
+| :--: |
+| The standard KF (tuned by noise-estimation) vs. the Optimized KF, in the test data of the simple-lidar example problem: errors summary (left) and a sample of models predictions against the actual target (right)  (images from `example.ipynb`) |
 
 ## Background: the Kalman Filter
 
@@ -48,7 +56,11 @@ Tuning the KF parameters through noise estimation (as explained above) yields op
 
 ## How to use
 
-Usage example: [`example.ipynb`](https://github.com/ido90/Optimized-Kalman-Filter/blob/master/example.ipynb).
+**Installation**: `pip install Optimized-Kalman-Filter`
+
+**Import**: `import okf`
+
+**Usage example**: [`example.ipynb`](https://github.com/ido90/Optimized-Kalman-Filter/blob/master/example.ipynb).
 
 #### Data
 The data consists of 2 lists of length n, where n is the number of trajectories in the data:
@@ -71,13 +83,12 @@ The configuration of the KF has to be specified as a dict `model_args` containin
 See an example [here](https://github.com/ido90/Optimized-Kalman-Filter/blob/master/okf/example/simple_lidar_model.py).
 
 #### Train and test
-`import okf`
-
-`model = okf.OKF(**model_args)  # set optimize=False for the standard KF baseline`
-
-`okf.train(model, Ztrain, Xtrain)`
-  
-`loss = okf.test_model(model, Ztest, Xtest, loss_fun=model_args['loss_fun'])`
+```
+import okf
+model = okf.OKF(**model_args)  # set optimize=False for the standard KF baseline`
+okf.train(model, Ztrain, Xtrain)
+loss = okf.test_model(model, Ztest, Xtest, loss_fun=model_args['loss_fun'])
+```
 
 #### Analysis
 See [`example.ipynb`](https://github.com/ido90/Optimized-Kalman-Filter/blob/master/example.ipynb).
