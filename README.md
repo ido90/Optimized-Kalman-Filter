@@ -13,11 +13,11 @@ This package implements the algorithm introduced in the paper [Kalman Filter Is 
 
 The Kalman Filter (KF) is a popular algorithm for filtering problems such as state estimation, smoothing, tracking and navigation. For example, consider tracking a plane using noisy measurements (observations) from a radar. Every time-step, we try to predict the motion of the plane, then receive a new measurement from the radar and update our belief accordingly.
 
-| <img src="https://idogreenberg.neocities.org/linked_images/KF_illustration.png" width="360"> |
+| <img src="https://idogreenberg.neocities.org/linked_images/KF_illustration.png" width="320"> |
 | :--: |
 | An illustration of a single step of the Kalman Filter: predict the next state (black arrow); receive a new observation (green ellipse); update your belief about the state (mixing the two right ellipses)  (image by Ido Greenberg) |
 
-| <img src="https://idogreenberg.neocities.org/linked_images/KF_diagram.png" width="480"> |
+| <img src="https://idogreenberg.neocities.org/linked_images/KF_diagram.png" width="360"> |
 | :--: |
 | A diagram of the Kalman Filter algorithm  (image by Ido Greenberg) |
 
