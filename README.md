@@ -33,6 +33,10 @@ Tuning the KF parameters through noise estimation (as explained above) yields op
 
 ## How to use
 
+Installation: `pip install Optimized-Kalman-Filter`
+
+Import: `import okf`
+
 Usage example: [`example.ipynb`](https://github.com/ido90/Optimized-Kalman-Filter/blob/master/example.ipynb).
 
 #### Data
@@ -56,8 +60,6 @@ The configuration of the KF has to be specified as a dict `model_args` containin
 See an example [here](https://github.com/ido90/Optimized-Kalman-Filter/blob/master/okf/example/simple_lidar_model.py).
 
 #### Train and test
-`import okf`
-
 `model = okf.OKF(**model_args)  # set optimize=False for the standard KF baseline`
 
 `okf.train(model, Ztrain, Xtrain)`
