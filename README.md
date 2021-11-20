@@ -33,9 +33,7 @@ Tuning the KF parameters through noise estimation (as explained above) yields op
 
 ## How to use
 
-Installation: `TODO`
-
-Usage example: see [`example.ipynb`](https://github.com/ido90/Optimized-Kalman-Filter/blob/master/example.ipynb).
+Usage example: [`example.ipynb`](https://github.com/ido90/Optimized-Kalman-Filter/blob/master/example.ipynb).
 
 #### Data
 The data consists of 2 lists of length n, where n is the number of trajectories in the data:
@@ -46,7 +44,7 @@ For example, if a state is 4-dimensional (e.g. (x,y,vx,vy)) and an observation i
 
 Below we assume that `Xtrain, Ztrain, Xtest, Ztest` correspond to train and test datasets of the format specified above.
 
-#### Configuration
+#### KF configuration
 The configuration of the KF has to be specified as a dict `model_args` containing the following entries:
 - `dim_x`: the number of entries in a state
 - `dim_z`: the number of entries in an observation
