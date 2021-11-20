@@ -1,8 +1,12 @@
 # Optimized Kalman Filter
 
-Get an optimized Kalman Filter from data of system-states and observations.
+**Get an optimized Kalman Filter from data of system-states and observations.**
 
-This package implements the algorithm introduced in the paper [Kalman Filter Is All You Need: Optimization Works When Noise Estimation Fails](https://arxiv.org/abs/2104.02372), by Greenberg, Mannor and Yannay.
+This package implements the paper [**Kalman Filter Is All You Need: Optimization Works When Noise Estimation Fails**](https://arxiv.org/abs/2104.02372), by Greenberg, Mannor and Yannay.
+
+**Installation**: `pip install Optimized-Kalman-Filter`
+
+**Usage example**: [`example.ipynb`](https://github.com/ido90/Optimized-Kalman-Filter/blob/master/example.ipynb).
 
 - [Background](#background-the-kalman-filter)
 - [When to use](#when-to-use-this-package)
@@ -37,11 +41,11 @@ Tuning the KF parameters through noise estimation (as explained above) yields op
 
 ## How to use
 
-Installation: `pip install Optimized-Kalman-Filter`
+**Installation**: `pip install Optimized-Kalman-Filter`
 
-Import: `import okf`
+**Import**: `import okf`
 
-Usage example: [`example.ipynb`](https://github.com/ido90/Optimized-Kalman-Filter/blob/master/example.ipynb).
+**Usage example**: [`example.ipynb`](https://github.com/ido90/Optimized-Kalman-Filter/blob/master/example.ipynb).
 
 #### Data
 The data consists of 2 lists of length n, where n is the number of trajectories in the data:
@@ -64,11 +68,12 @@ The configuration of the KF has to be specified as a dict `model_args` containin
 See an example [here](https://github.com/ido90/Optimized-Kalman-Filter/blob/master/okf/example/simple_lidar_model.py).
 
 #### Train and test
-`model = okf.OKF(**model_args)  # set optimize=False for the standard KF baseline`
-
-`okf.train(model, Ztrain, Xtrain)`
-  
-`loss = okf.test_model(model, Ztest, Xtest, loss_fun=model_args['loss_fun'])`
+```
+import okf
+model = okf.OKF(**model_args)  # set optimize=False for the standard KF baseline`
+okf.train(model, Ztrain, Xtrain)
+loss = okf.test_model(model, Ztest, Xtest, loss_fun=model_args['loss_fun'])
+```
 
 #### Analysis
 See [`example.ipynb`](https://github.com/ido90/Optimized-Kalman-Filter/blob/master/example.ipynb).
