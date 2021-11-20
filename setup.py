@@ -13,7 +13,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     packages=setuptools.find_packages(),
-    url="https://github.com/ido90/OKF",
+    url="https://github.com/ido90/Optimized-Kalman-Filter",
     keywords = ["OKF", "Optimized Kalman Filter", "Kalman Filter"],
     classifiers=[
         "License :: OSI Approved :: MIT License",
