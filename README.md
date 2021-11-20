@@ -9,6 +9,10 @@ This package implements the algorithm introduced in the paper [Kalman Filter Is 
 - [Why to use](#why-to-use)
 - [How to use](#how-to-use)
 
+| <img src="https://idogreenberg.neocities.org/linked_images/okf_errors.png" width="280"> <img src="https://idogreenberg.neocities.org/linked_images/okf_sample.png" width="270"> |
+| :--: |
+| The standard KF (tuned by noise-estimation) vs. the Optimized KF, in the test data of the simple-lidar example problem: errors summary (left) and a sample of models predictions against the actual target (right)  (images from `example.ipynb`) |
+
 ## Background: the Kalman Filter
 
 The Kalman Filter (KF) is a popular algorithm for filtering problems such as state estimation, smoothing, tracking and navigation. For example, consider tracking a plane using noisy measurements (observations) from a radar. Every time-step, we try to predict the motion of the plane, then receive a new measurement from the radar and update our belief accordingly.
@@ -68,7 +72,3 @@ See an example [here](https://github.com/ido90/Optimized-Kalman-Filter/blob/mast
 
 #### Analysis
 See [`example.ipynb`](https://github.com/ido90/Optimized-Kalman-Filter/blob/master/example.ipynb).
-
-| <img src="https://idogreenberg.neocities.org/linked_images/okf_errors.png" width="280"> <img src="https://idogreenberg.neocities.org/linked_images/okf_sample.png" width="270"> |
-| :--: |
-| The standard KF (tuned by noise-estimation) vs. the Optimized KF, in the test data of the simple-lidar example problem: errors summary (left) and a sample of models predictions against the actual target (right)  (images from `example.ipynb`) |
