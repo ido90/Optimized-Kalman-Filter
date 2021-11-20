@@ -4,7 +4,7 @@ Get an optimized Kalman Filter from data of system-states and observations.
 
 This package implements the algorithm introduced in the paper [Kalman Filter Is All You Need: Optimization Works When Noise Estimation Fails](https://arxiv.org/abs/2104.02372), by Greenberg, Mannor and Yannay.
 
-- [Background](#background--the-kalman-filter)
+- [Background](#background-the-kalman-filter)
 - [When to use](#when-to-use-this-package)
 - [Why to use](#why-to-use)
 - [How to use](#how-to-use)
@@ -15,11 +15,11 @@ The Kalman Filter (KF) is a popular algorithm for filtering problems such as sta
 
 | <img src="https://idogreenberg.neocities.org/linked_images/KF_illustration.png" width="360"> |
 | :--: |
-| An illustration of a single step of the Kalman Filter: predict the next state (black arrow); receive a new observation (green ellipse); update your belief about the state (mixing the two right ellipses) |
+| An illustration of a single step of the Kalman Filter: predict the next state (black arrow); receive a new observation (green ellipse); update your belief about the state (mixing the two right ellipses)  (image by Ido Greenberg) |
 
 | <img src="https://idogreenberg.neocities.org/linked_images/KF_diagram.png" width="480"> |
 | :--: |
-| A diagram of the Kalman Filter algorithm |
+| A diagram of the Kalman Filter algorithm  (image by Ido Greenberg) |
 
 To tune the KF, one has to determine the parameters representing the measurement (observation) noise and the motion-prediction noise, expressed as covariance matrices R and Q. Given a dataset of measurements {z_t} (e.g. from the radar), tuning these parameters may be a difficult task, and has been studied for many decades. However, given data of *both* measurements {z_t} and true-states {x_t} (e.g. true plane locations), the parameters R,Q are usually estimated from the data as the sample covariance matrices of the noise.
 
