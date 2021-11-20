@@ -68,3 +68,7 @@ See an example [here](https://github.com/ido90/Optimized-Kalman-Filter/blob/mast
 
 #### Analysis
 See [`example.ipynb`](https://github.com/ido90/Optimized-Kalman-Filter/blob/master/example.ipynb).
+
+| <img src="https://idogreenberg.neocities.org/linked_images/okf_errors.png" width="280"> <img src="https://idogreenberg.neocities.org/linked_images/okf_sample.png" width="270"> |
+| :--: |
+| The standard KF (tuned by noise-estimation) vs. the Optimized KF, in the test data of the simple-lidar example problem: errors summary (left) and a sample of models predictions against the actual target (right)  (images from `example.ipynb`) |
