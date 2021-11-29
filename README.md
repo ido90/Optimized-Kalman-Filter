@@ -70,7 +70,7 @@ See an example [here](https://github.com/ido90/Optimized-Kalman-Filter/blob/mast
 #### Train and test
 ```
 import okf
-model = okf.OKF(**model_args)  # set optimize=False for the standard KF baseline`
+model = okf.OKF(**model_args)  # set optimize=False for the standard KF baseline
 okf.train(model, Ztrain, Xtrain)
 loss = okf.test_model(model, Ztest, Xtest, loss_fun=model_args['loss_fun'])
 ```
