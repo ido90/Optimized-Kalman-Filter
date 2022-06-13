@@ -1,12 +1,11 @@
 Metadata-Version: 2.1
 Name: Optimized-Kalman-Filter
-Version: 0.0.2
+Version: 0.0.3
 Summary: Optimization of a Kalman Filter from data of states and their observations.
 Home-page: https://github.com/ido90/Optimized-Kalman-Filter
 Author: Ido Greenberg
 License: MIT
 Keywords: OKF,Optimized Kalman Filter,Kalman Filter
-Platform: UNKNOWN
 Classifier: License :: OSI Approved :: MIT License
 Classifier: Programming Language :: Python :: 3
 Requires-Python: >=3.5
@@ -85,12 +84,10 @@ See an example [here](https://github.com/ido90/Optimized-Kalman-Filter/blob/mast
 #### Train and test
 ```
 import okf
-model = okf.OKF(**model_args)  # set optimize=False for the standard KF baseline`
+model = okf.OKF(**model_args)  # set optimize=False for the standard KF baseline
 okf.train(model, Ztrain, Xtrain)
 loss = okf.test_model(model, Ztest, Xtest, loss_fun=model_args['loss_fun'])
 ```
 
 #### Analysis
 See [`example.ipynb`](https://github.com/ido90/Optimized-Kalman-Filter/blob/master/example.ipynb).
-
-
