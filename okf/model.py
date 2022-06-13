@@ -84,7 +84,7 @@ class OKF(nn.Module):
 
         self.z2x = init_z2x
         if self.z2x is None:
-            if self.dim_x == self.dim_z:
+            if self.dim_x != self.dim_z:
                 raise ValueError('Whenever dim_x!=dim_z, the init_z2x mapping must be specified explicitly.')
             self.z2x = lambda x: x
 
