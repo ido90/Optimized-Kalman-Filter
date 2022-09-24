@@ -1,11 +1,12 @@
 Metadata-Version: 2.1
 Name: Optimized-Kalman-Filter
-Version: 0.0.3
+Version: 0.0.4
 Summary: Optimization of a Kalman Filter from data of states and their observations.
 Home-page: https://github.com/ido90/Optimized-Kalman-Filter
 Author: Ido Greenberg
 License: MIT
 Keywords: OKF,Optimized Kalman Filter,Kalman Filter
+Platform: UNKNOWN
 Classifier: License :: OSI Approved :: MIT License
 Classifier: Programming Language :: Python :: 3
 Requires-Python: >=3.5
@@ -16,7 +17,7 @@ License-File: LICENSE.txt
 
 **Get an optimized Kalman Filter from data of system-states and observations.**
 
-This package implements the paper [**Kalman Filter Is All You Need: Optimization Works When Noise Estimation Fails**](https://arxiv.org/abs/2104.02372), by Greenberg, Mannor and Yannay.
+This package implements the paper [**The Fragility of Noise Estimation in Kalman Filter: Optimization Can Handle Model-Misspecification**](https://arxiv.org/abs/2104.02372), by Greenberg, Mannor and Yannay.
 
 **Installation**: `pip install Optimized-Kalman-Filter`
 
@@ -91,3 +92,5 @@ loss = okf.test_model(model, Ztest, Xtest, loss_fun=model_args['loss_fun'])
 
 #### Analysis
 See [`example.ipynb`](https://github.com/ido90/Optimized-Kalman-Filter/blob/master/example.ipynb).
+
+
