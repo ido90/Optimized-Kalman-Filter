@@ -19,7 +19,7 @@ The OKF class includes:
 Written by Ido Greenberg, 2021
 '''
 
-import types
+import types, warnings
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -57,7 +57,8 @@ class OKF(nn.Module):
         :param R0: The initial value of the observation-noise covariance matrix R, from which the optimization begins.
                    If scalar, it is used as a scale drawing the initial matrix randomly [positive numeric OR pytorch
                    tensor with type double and shape (dim_z,dim_z); default=1; only used if optimize==True].
-        :param init_z2x: A function that receives the first observation and returns the first estimate of the state
+        :param init_z2x: A function that receives the first observation and returns the first estimate of the state.
+                         If array instead of a callable, just initializing the state to the given array.
                          [fun(z); default=identity function; if dim_x!=dim_z, another function must be specified].
         :param loss_fun: Loss function to optimize [fun(predicted_x, true_x); default=MSE; only used if optimize==True].
         :param optimize: Whether to tune the parameters Q,R by optimization or using the standard sample covariance
@@ -83,10 +84,16 @@ class OKF(nn.Module):
         self.reset_model()
 
         self.z2x = init_z2x
-        if self.z2x is None:
+        if init_z2x is None:
             if self.dim_x != self.dim_z:
-                raise ValueError('Whenever dim_x!=dim_z, the init_z2x mapping must be specified explicitly.')
-            self.z2x = lambda x: x
+                warnings.warn('No state initialization was provided (init_z2x). Could not initialize '
+                              'x=z either, since dim_x!=dim_z. Instead, x will be initialized to the '
+                              '0-array. Note that this is often highly sub-optimal. which is not recommended.')
+                self.z2x = lambda z: torch.zeros(self.dim_x, dtype=torch.double)
+            else:
+                self.z2x = lambda z: z
+        elif not callable(self.z2x):
+            self.z2x = lambda z: torch.tensor(init_z2x, dtype=torch.double)
 
         self.loss_fun = loss_fun
         if self.loss_fun is None:
@@ -205,7 +212,7 @@ class OKF(nn.Module):
     def encode_SPD(A, eps=1e-6):
         '''Apply Cholesky decomposition to A and return the log-diagonal entires [n] and below [n*(n-1)/2].'''
         n = A.shape[0]
-        A = torch.cholesky(A+eps*torch.eye(n))
+        A = torch.linalg.cholesky(A+eps*torch.eye(n))
         D = A.diag()
         D = D.log()
         ids = torch.tril_indices(n,n,-1)
