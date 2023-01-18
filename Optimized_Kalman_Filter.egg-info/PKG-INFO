@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: Optimized-Kalman-Filter
-Version: 0.0.5
+Version: 0.0.6
 Summary: Optimization of a Kalman Filter from data of states and their observations.
 Home-page: https://github.com/ido90/Optimized-Kalman-Filter
 Author: Ido Greenberg
@@ -16,8 +16,6 @@ License-File: LICENSE.txt
 # Optimized Kalman Filter
 
 **Get an optimized Kalman Filter from data of system-states and observations.**
-
-This package implements the paper [**The Fragility of Noise Estimation in Kalman Filter: Optimization Can Handle Model-Misspecification**](https://arxiv.org/abs/2104.02372), by Greenberg, Mannor and Yannay.
 
 **Installation**: `pip install Optimized-Kalman-Filter`
 
