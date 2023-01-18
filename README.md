@@ -2,8 +2,6 @@
 
 **Get an optimized Kalman Filter from data of system-states and observations.**
 
-This package implements the paper [**The Fragility of Noise Estimation in Kalman Filter: Optimization Can Handle Model-Misspecification**](https://arxiv.org/abs/2104.02372), by Greenberg, Mannor and Yannay.
-
 **Installation**: `pip install Optimized-Kalman-Filter`
 
 **Usage example**: [`example.ipynb`](https://github.com/ido90/Optimized-Kalman-Filter/blob/master/example.ipynb).
