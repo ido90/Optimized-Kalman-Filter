@@ -31,7 +31,7 @@ from torch import matmul as mp
 from . import utils
 
 class OKF(nn.Module):
-    def __init__(self, dim_x, dim_z, F, H, model_name='OKF', P0=1e3, Q0=1, R0=1,
+    def __init__(self, dim_x, dim_z, F, H, model_name='OKF', P0=1e3, Q0=1, R0=1, x0=None,
                  init_z2x=None, loss_fun=None, optimize=True, model_files_path='models/'):
         '''
         A model of KF whose parameters (Q,R) are pytorch tensors and can be optimized wrt a loss function.
@@ -57,6 +57,9 @@ class OKF(nn.Module):
         :param R0: The initial value of the observation-noise covariance matrix R, from which the optimization begins.
                    If scalar, it is used as a scale drawing the initial matrix randomly [positive numeric OR pytorch
                    tensor with type double and shape (dim_z,dim_z); default=1; only used if optimize==True].
+        :param x0: The initial value of the state x. If None, then the state will only be initialized after the first
+                   observation z, as x=init_z2x(z). If scalar, x=x0*ones(dim_x) is used [scalar OR pytorch tensor with
+                   type double and shape dim_x OR None; default=None].
         :param init_z2x: A function that receives the first observation and returns the first estimate of the state.
                          If array instead of a callable, just initializing the state to the given array.
                          [fun(z); default=identity function; if dim_x!=dim_z, another function must be specified].
@@ -77,6 +80,14 @@ class OKF(nn.Module):
         self.is_H_fun = isinstance(self.H, types.FunctionType)
         self.is_F_fun = isinstance(self.F, types.FunctionType)
 
+        if x0 is None:
+            x0 = self.dim_x * [None]
+        elif not torch.is_tensor(x0):
+            x0 = x0 * torch.ones(self.dim_x, dtype=torch.double)
+        self.x0 = x0
+
+        if not torch.is_tensor(P0):
+            P0 = P0 * torch.eye(self.dim_x, dtype=torch.double)
         self.P0 = P0
         self.Q0 = Q0
         self.R0 = R0
@@ -86,9 +97,10 @@ class OKF(nn.Module):
         self.z2x = init_z2x
         if init_z2x is None:
             if self.dim_x != self.dim_z:
-                warnings.warn('No state initialization was provided (init_z2x). Could not initialize '
-                              'x=z either, since dim_x!=dim_z. Instead, x will be initialized to the '
-                              '0-array. Note that this is often highly sub-optimal. which is not recommended.')
+                if x0[0] is None:
+                    warnings.warn('No state initialization was provided (init_z2x). Could not initialize '
+                                  'x=z either, since dim_x!=dim_z. Instead, x will be initialized to the '
+                                  '0-array. Note that this is often highly sub-optimal. which is not recommended.')
                 self.z2x = lambda z: torch.zeros(self.dim_x, dtype=torch.double)
             else:
                 self.z2x = lambda z: z
@@ -99,6 +111,12 @@ class OKF(nn.Module):
         if self.loss_fun is None:
             self.loss_fun = lambda pred,x: ((pred-x)**2).sum()
 
+        # verify dimensions
+        if len(self.x0) != self.dim_x:
+            raise ValueError(f'Bad input dimension: len(x0) = {len(self.x0)} != {self.dim_x}.')
+        if self.P0.shape != (self.dim_x, self.dim_x):
+            raise ValueError(f'Bad input dimension: P0.shape = {self.P0.shape} != {(self.dim_x, self.dim_x)}.')
+
         self.x = None
         self.z = None
         self.P = None
@@ -106,9 +124,9 @@ class OKF(nn.Module):
 
     def init_state(self):
         '''Initialize the estimate (x,P) and the observation (z) before a new sequence of observations (trajectory).'''
-        self.x = self.dim_x * [None]
+        self.x = self.x0
         self.z = self.dim_z * [None]
-        self.P = self.P0 * torch.eye(self.dim_x, dtype=torch.double)
+        self.P = self.P0
 
     def reset_model(self):
         '''Reset the model parameters (Q,R).'''

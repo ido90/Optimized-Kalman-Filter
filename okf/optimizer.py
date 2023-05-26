@@ -31,6 +31,8 @@ def train_models(models, X, Y, **kwargs):
         r1, r2 = train(m, X, Y, **kwargs)
         res_per_iter = pd.concat((res_per_iter, r1))
         res_per_sample = pd.concat((res_per_sample, r2))
+    res_per_iter.reset_index(drop=True, inplace=True)
+    res_per_sample.reset_index(drop=True, inplace=True)
     return res_per_iter, res_per_sample
 
 def train(model, X, Y, split_data=None, p_valid=0.15, n_epochs=1, batch_size=10,
