@@ -58,10 +58,10 @@ Below we assume that `Xtrain, Ztrain, Xtest, Ztest` correspond to train and test
 The configuration of the KF has to be specified as a dict `model_args` containing the following entries:
 - `dim_x`: the number of entries in a state
 - `dim_z`: the number of entries in an observation
-- `init_z2x`: a function that receives the first observation and returns the first state-estimate
 - `F`: the dynamics model: a pytorch tensor of type double and shape (dim_x, dim_x)
 - `H`: the observation model: a pytorch tensor of type double and shape (dim_z, dim_x); or a function that returns such a tensor given the estimated state and the current observation
 - `loss_fun`: function(predicted_x, true_x) used as loss for training and evaluation
+- State initialization: initialize either explicitly via `x0` (tensor of shape dim_x); or from the first observation via the function `init_z2x`
 
 See an example [here](https://github.com/ido90/Optimized-Kalman-Filter/blob/master/okf/example/simple_lidar_model.py).
 
