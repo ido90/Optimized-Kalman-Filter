@@ -5,7 +5,7 @@
 **This repo implements an Optimized Kalman Filter (OKF), which optimizes the parameters $Q,R$ to minimize the MSE.**
 
 **Motivation**: The KF parameters $Q,R$ are usually estimated as the covariances of the noise.
-However, such estimation is usually sub-optimal, hence explicit MSE optimization is preferable, as discussed in the *NeurIPS 2023* paper [Optimization or Architecture: How to Hack Kalman Filtering](https://arxiv.org/abs/2104.02372), by Ido Greenberg, Netanel Yannay and Shie Mannor.
+However, such estimation is usually sub-optimal, hence explicit MSE optimization is preferable, as discussed in the *NeurIPS 2023* paper [Optimization or Architecture: How to Hack Kalman Filtering](https://arxiv.org/abs/2310.00675), by Ido Greenberg, Netanel Yannay and Shie Mannor.
 
 **Problem setup**: A dataset of trajectories is required, with *both* observations and true system-states (learning from observations alone is currently not supported). The parameters $Q,R$ are optimized with respect to this dataset, and then can be used to make predictions on new trajectories.
 
