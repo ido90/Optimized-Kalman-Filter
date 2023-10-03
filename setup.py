@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="Optimized Kalman Filter",
-    version="0.0.7",
+    version="0.0.9",
     license='MIT',
     author="Ido Greenberg",
     description="Optimization of a Kalman Filter from data of states and their observations.",
