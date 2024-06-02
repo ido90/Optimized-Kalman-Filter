@@ -1,7 +1,6 @@
 .ipynb_checkpoints/
 .idea/
 
-data/
 models/
 
 okf/__pycache__/
